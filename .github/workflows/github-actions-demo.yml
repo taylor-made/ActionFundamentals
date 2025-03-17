@@ -39,7 +39,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: Test
-    if: github.event_name == "workflow_dispatch"
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - run: echo "Testing..."
 
@@ -48,7 +48,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: Load-Test
-    if: github.event_name == "workflow_dispatch"
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - run: echo "Testing..."
       - name: Sleep for 15 seconds
@@ -62,7 +62,7 @@ jobs:
     environment:
       name: Production
       url: https://writeabout.net
-    if: inputs.environment == "Production"
+    if: inputs.environment == 'Production'
     steps:
       - run: |
           echo "Step 1 deploying..."
