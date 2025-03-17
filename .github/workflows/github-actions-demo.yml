@@ -10,8 +10,13 @@ on:
     branches:
     - main
   schedule:
-  - cron: "15 6 * * 0"
+    - cron: "15 6 * * 0"
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run against'
+        type: environment
+        required: true
 
 jobs:
   build:
