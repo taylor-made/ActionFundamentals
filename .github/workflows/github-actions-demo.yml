@@ -33,3 +33,49 @@ jobs:
 
       - name: List files in the repo
         run: tree
+
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Test
+    if: github.event_name == "workflow_dispatch"
+    steps:
+      - run: echo "Testing..."
+
+  load-test:
+    name: Load-Test
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Load-Test
+    if: github.event_name == "workflow_dispatch"
+    steps:
+      - run: echo "Testing..."
+      - name: Sleep for 15 seconds
+        run: sleep 15s
+        shell: bash
+
+  production:
+    name: Production
+    needs: [test, load-test]
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: https://writeabout.net
+    if: inputs.environment == "Production"
+    steps:
+      - run: |
+          echo "Step 1 deploying..."
+          sleep 10
+      - run: |
+          echo "Step 2 deploying..."
+          sleep 10
+      - run: |
+          echo "Step 3 deploying..."
+          sleep 10
+      - run: |
+          echo "Step 4 deploying..."
+          sleep 10
+      - run: |
+          echo "Step 5 deploying..."
+          sleep 10
